@@ -15,4 +15,17 @@ class Veiculo extends Model
         'dataAquisicao',
         'id_acessibilidade',
     ];
+
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'dataAquisicao',
+    ];
+
+
+    public function acessibilidade()
+    {
+        return $this->belongsTo(Acessibilidade::class, 'id_acessibilidade', 'id');
+    }
+
 }

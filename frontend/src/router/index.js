@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,18 +11,33 @@ const router = createRouter({
     {
       path: '/about',
       name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue')
     },
     {
-      path: '/cadastrar-acessibilidade',
+      path: '/acessibilidade/listagem',
+      name: 'listagemAcessibilidade',
+      component: () => import('../views/acessbilidades/listagem.vue')
+    },
+    {
+      path: '/acessibilidade/cadastro',
       name: 'cadastroAcessibilidade',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/cadastroAcessibilidade.vue')
+      component: () => import('../views/acessbilidades/cadastro.vue')
+    },
+
+    {
+      path: '/veiculo/cadastro',
+      name: 'cadastroVeiculos',
+      component: () => import('../views/veiculos/cadastro.vue')
+    },
+    {
+      path: '/veiculo/listagem',
+      name: 'listagemVeiculos',
+      component: () => import('../views/veiculos/listagem.vue')
+    },
+    {
+      path: '/veiculo/edicao/:id',
+      name: 'edicaoVeiculos',
+      component: () => import('../views/veiculos/edicao.vue')
     },
     
   ]

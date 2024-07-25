@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('modelo');
             $table->string('placa');
             $table->date('dataAquisicao');
-            $table->foreignId('id_acessibilidade')->constrained('acessibilidades', 'id');
+            $table->unsignedBigInteger('id_acessibilidade')->nullable();
+            $table->foreign('id_acessibilidade')->references('id')->on('acessibilidades');
             $table->timestamps();
         });
     }

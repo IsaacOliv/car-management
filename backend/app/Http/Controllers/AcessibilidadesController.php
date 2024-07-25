@@ -10,24 +10,36 @@ class AcessibilidadesController extends Controller
 {
     public function get()
     {
-        return json_encode('acessibilidade');
+        return Acessibilidade::select('id', 'categoria')->orderBy('categoria')->get();
     }
 
     public function post(Request $request)
     {
-        $request->validate([
-            'categoria' => 'required|unique:acessibilidades'
-        ],[
-            'categoria.required'    => 'O campo e categoria é de preenchimento obrigatorio!',
-            'categoria.unique'      => 'A categoria já existe!'
-        ]);
+        try {
+            $request->validate([
+                'categoria' => 'required|unique:acessibilidades'
+            ],[
+                'categoria.required'    => 'O campo e categoria é de preenchimento obrigatorio!',
+                'categoria.unique'      => 'A categoria já existe!'
+            ]);
 
-        $criar = Acessibilidade::create([
-            'categoria' => $request->categoria
-        ]);
-        if (!$criar) {
-            return response()->json(['msg' => 'Não foi possivel cadastrar a categoria!'], 404);
+            $criar = Acessibilidade::create([
+                'categoria' => $request->categoria
+            ]);
+            if (!$criar) {
+                throw new \Exception('Não foi possivel cadastrar a categoria!');
+            }
+
+            return response()->json(['msg' => 'Categoria cadastrada com sucesso!'], Response::HTTP_CREATED);
+        } catch (\Exception $ex) {
+            return response()->json(['msg' => $ex->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
+
         }
-        return response()->json(['msg' => 'Categoria cadastrada com sucesso!'], Response::HTTP_CREATED);
+    }
+
+    public function put(Request $request)
+    {
+        session('update', $request->id_categoria);
+        dd(session('update'));
     }
 }

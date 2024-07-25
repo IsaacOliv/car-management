@@ -1,7 +1,5 @@
 <script setup>
 import Nav from '@/components/NavBar.vue'
-import toast from '@/services/vueToast.js'
-
 
 </script>
 
@@ -11,5 +9,8 @@ import toast from '@/services/vueToast.js'
   <router-view></router-view>
 </template>
 
-<style scoped>
+<style>
+  tbody tr td{
+    align-content: center;
+  }
 </style>

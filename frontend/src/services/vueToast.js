@@ -2,7 +2,7 @@ import { useToast } from 'vue-toastification'
 
 const toast = useToast({
     position: "bottom-right",
-    timeout: 5000,
+    timeout: 3000,
     closeOnClick: true,
     pauseOnFocusLoss: true,
     pauseOnHover: true,

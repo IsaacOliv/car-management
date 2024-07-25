@@ -47,7 +47,4 @@ import {reactive, onMounted} from "vue";
 </template>
 
 <style scoped>
-  tbody tr td{
-    align-content: center;
-  }
 </style>

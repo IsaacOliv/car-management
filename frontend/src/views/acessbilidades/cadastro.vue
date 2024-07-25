@@ -1,6 +1,6 @@
 <script setup>
-import http from '@/services/http.js'
-import toast from '@/services/vueToast.js'
+import http from '@/services/http.js';
+import toast from '@/services/vueToast.js';
 import { reactive } from 'vue';
 
 const acessibilidade = reactive({});
@@ -11,7 +11,7 @@ async function cadastrarAcessibilidade() {
     const {data} = await http.post('/api/acessibilidades', acessibilidade)
     toast.success(data.msg);
   } catch (error) {
-    console.log(error);
+    toast.error(error.response.data.msg);
   }
 }
 
