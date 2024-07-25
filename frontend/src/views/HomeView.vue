@@ -1,5 +1,6 @@
 <script setup>
-import {ref, reactive, onMounted} from "vue";
+import http from '@/services/http.js'
+import {reactive, onMounted} from "vue";
   const veiculos = reactive({
     veiculos:{
 
@@ -8,7 +9,7 @@ import {ref, reactive, onMounted} from "vue";
 
   onMounted(async() => {
     try {
-      const {data} = await http.get('/veiculos');
+      const {data} = await http.get('api/veiculos');
       veiculos.veiculos = data;
     } catch (error) {
       console.log(error);

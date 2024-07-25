@@ -8,7 +8,10 @@
                         <router-link class="nav-link active" aria-current="page" to="/">Inicio</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" aria-current="page" to="/">Cadastrar</router-link>
+                        <router-link class="nav-link" aria-current="page" to="/">Cadastrar carro</router-link>
+                    </li>  
+                    <li class="nav-item">
+                        <router-link class="nav-link" aria-current="page" to="/cadastrar-acessibilidade">Cadastrar acessibilidade</router-link>
                     </li>  
                 </ul>
             </div>

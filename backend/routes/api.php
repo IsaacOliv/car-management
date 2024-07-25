@@ -11,6 +11,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::controller(AcessibilidadesController::class)->group(function(){
     Route::get('/acessibilidades', 'get');
+    Route::post('/acessibilidades', 'post');
 });
 
 Route::controller(VeiculosController::class)->group(function(){
