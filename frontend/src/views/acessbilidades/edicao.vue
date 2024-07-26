@@ -7,9 +7,8 @@ import { onMounted, reactive } from 'vue';
 const route = useRoute()
 
 const dados = reactive({
-    acessibilidade: {
-
-    }
+    acessibilidade: {},
+    errors:{}
 });
 
 async function editarAcessibilidade() {
@@ -29,7 +28,10 @@ async function updateAcessibilidade() {
         const { data } = await http.put('/api/acessibilidades/' + route.params.id, dados.acessibilidade)
         toast.success('Acessibilidade atualizada com sucesso!');
     } catch (error) {
-        toast.error(error.response.data.msg);
+        dados.errors = error.response.data['errors'];
+        if (error.response.data.msg) {
+            toast.error(error.response.data.msg);
+        }
     }
 }
 
@@ -50,6 +52,8 @@ async function updateAcessibilidade() {
                         <input type="text" class="form-control mt-3" id="categoria" max="30" required
                             v-model="dados.acessibilidade.categoria">
                     </div>
+                    <span class="erro" v-if="dados.errors.categoria">{{ dados.errors.categoria[0] }}</span>
+
 
                     <div class="text-center mt-3">
                         <button class="btn btn-primary" v-on:click.submit.prevent="updateAcessibilidade">Editar</button>
@@ -61,4 +65,8 @@ async function updateAcessibilidade() {
     </main>
 </template>
 
-<style scoped></style>
+<style scoped>
+    .erro{
+        color: red;
+    }
+</style>

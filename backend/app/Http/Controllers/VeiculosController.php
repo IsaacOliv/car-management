@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\VeiculosRequest;
 use App\Models\Veiculo;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -18,22 +19,9 @@ class VeiculosController extends Controller
             ->get();
     }
 
-    public function post(Request $request)
+    public function post(VeiculosRequest $request)
     {
         try {
-            $request->validate([
-                'dataAquisicao'     => 'required|before_or_equal:tomorrow',
-                'modelo'            => 'required',
-                'placa'             => 'required|unique:veiculos',
-                'id_acessibilidade' => 'integer',
-            ], [
-                'dataAquisicao.before_or_equal'      => 'A data de aquisição não pode ser superior ao dia de hoje!',
-                'dataAquisicao.required'            => 'O campo Data de aquisição é de preenchimento obrigatorio!',
-                'modelo.required'                   => 'O campo de Modelo é de preenchimento obrigatorio!',
-                'placa.required'                    => 'O campo Placa é de preenchimento obrigatorio!',
-                'placa.unique'                      => 'A placa informada já existe!',
-            ]);
-
             $acessibilidade = $request->id_acessibilidade == 0 ? null : $request->id_acessibilidade;
 
             $criar = Veiculo::create([
@@ -56,21 +44,9 @@ class VeiculosController extends Controller
         return Veiculo::findOrFail($id);
     }
 
-    public function put(Request $request, $id)
+    public function put(VeiculosRequest $request, $id)
     {
         try {
-            $request->validate([
-                'dataAquisicao'     => 'required|before_or_equal:tomorrow',
-                'modelo'            => 'required',
-                'placa'             => 'required|unique:veiculos,placa,' . $id,
-            ], [
-                'dataAquisicao.before_or_equal'     => 'A data de aquisição não pode ser superior ao dia de hoje!',
-                'dataAquisicao.required'            => 'O campo Data de aquisição é de preenchimento obrigatorio!',
-                'modelo.required'                   => 'O campo de Modelo é de preenchimento obrigatorio!',
-                'placa.required'                    => 'O campo Placa é de preenchimento obrigatorio!',
-                'placa.unique'                      => 'A placa informada já existe!',
-            ]);
-
             $veiculo = Veiculo::find($id);
             if (!$veiculo) {
             return response()->json(['msg' => 'Não foi possivel encontrar o veiculo selecionado!!'], Response::HTTP_NOT_FOUND);

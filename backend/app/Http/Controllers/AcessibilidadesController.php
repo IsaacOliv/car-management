@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AcessibilidadesRequest;
 use App\Models\Acessibilidade;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -13,16 +14,9 @@ class AcessibilidadesController extends Controller
         return Acessibilidade::select('id', 'categoria')->orderBy('categoria')->get();
     }
 
-    public function post(Request $request)
+    public function post(AcessibilidadesRequest $request)
     {
         try {
-            $request->validate([
-                'categoria' => 'required|unique:acessibilidades'
-            ], [
-                'categoria.required'    => 'O campo e categoria é de preenchimento obrigatorio!',
-                'categoria.unique'      => 'A categoria já existe!'
-            ]);
-
             $criar = Acessibilidade::create([
                 'categoria' => $request->categoria
             ]);
@@ -44,16 +38,9 @@ class AcessibilidadesController extends Controller
         return $acessibilidade;
     }
 
-    public function put(Request $request, $id)
+    public function put(AcessibilidadesRequest $request, $id)
     {
         try {
-            $request->validate([
-                'categoria' => 'required|unique:acessibilidades,categoria,'.$id
-            ], [
-                'categoria.required'    => 'O campo e categoria é de preenchimento obrigatorio!',
-                'categoria.unique'      => 'A categoria já existe!'
-            ]);
-
             $acessibilidade = Acessibilidade::find($id);
             if (!$acessibilidade) {
                 return response()->json(['msg' => 'Não foi possivel localizar a acessiblidade!'], Response::HTTP_NOT_FOUND);

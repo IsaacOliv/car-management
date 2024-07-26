@@ -33,7 +33,9 @@ async function updateVeiculo() {
         toast.success('Veiculo atualizado com sucesso!');
     } catch (error) {
         dados.errors = error.response.data['errors'];
-        toast.error(error.response.data['msg'])
+        if (error.response.data['msg']) {
+            toast.error(error.response.data['msg'])
+        }
     }
 }
 

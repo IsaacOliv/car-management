@@ -26,7 +26,9 @@ async function cadastrarVeiculo() {
         toast.success(data.msg);
     } catch (error) {
         dados.errors = error.response.data['errors'];
-        toast.error(error.response.data['msg'])
+        if (error.response.data['msg']) {
+            toast.error(error.response.data['msg'])
+        }
     }
 }
 

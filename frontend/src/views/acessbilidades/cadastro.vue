@@ -3,15 +3,21 @@ import http from '@/services/http.js';
 import toast from '@/services/vueToast.js';
 import { reactive } from 'vue';
 
-const acessibilidade = reactive({});
+const dados = reactive({
+    acessibilidade:{},
+    errors:{}
+});
 
 
 async function cadastrarAcessibilidade() {
     try {
-        const { data } = await http.post('/api/acessibilidades', acessibilidade)
+        const { data } = await http.post('/api/acessibilidades', dados.acessibilidade)
         toast.success(data.msg);
     } catch (error) {
-        toast.error(error.response.data.msg);
+        dados.errors = error.response.data['errors'];
+        if (error.response.data.msg) {
+            toast.error(error.response.data.msg);
+        }
     }
 }
 
@@ -30,8 +36,9 @@ async function cadastrarAcessibilidade() {
                     <div class="text-center">
                         <label for="categoria" class="form-label">Categoria:</label>
                         <input type="text" class="form-control mt-3" id="categoria" max="30" required
-                            v-model="acessibilidade.categoria">
-                    </div>
+                            v-model="dados.acessibilidade.categoria">
+                        </div>
+                        <span class="erro" v-if="dados.errors.categoria">{{ dados.errors.categoria[0] }}</span>
 
                     <div class="text-center mt-3">
                         <button class="btn btn-primary"
@@ -44,4 +51,8 @@ async function cadastrarAcessibilidade() {
     </main>
 </template>
 
-<style scoped></style>
+<style scoped>
+.erro{
+    color: red;
+}
+</style>
