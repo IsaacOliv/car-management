@@ -12,4 +12,10 @@ class Acessibilidade extends Model
     protected $fillable = [
         'categoria',
     ];
+
+
+    public function veiculos()
+    {
+        return $this->hasMany(Veiculo::class, 'id_acessibilidade', 'id');
+    }
 }

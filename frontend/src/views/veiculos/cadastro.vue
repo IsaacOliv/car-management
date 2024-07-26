@@ -4,7 +4,9 @@ import toast from '@/services/vueToast.js'
 import { onMounted, reactive } from 'vue';
 
 const dados = reactive({
-    veiculos: {},
+    veiculos: {
+        id_acessibilidade: 0
+    },
     acessibilidades: {},
     errors: {},
 });
@@ -33,18 +35,23 @@ async function cadastrarVeiculo() {
 
 <template>
     <main class="container mt-5">
+        <div class="text-center mb-5">
+            <h5>Cadastro de veiculos</h5>
+        </div>
         <div class="row">
             <form action="">
 
                 <div class="row">
                     <div class="col-md-6">
                         <label for="modelo" class="form-label">Modelo:</label>
-                        <input type="text" class="form-control" id="modelo" max="30" required v-model="dados.veiculos.modelo">
+                        <input type="text" class="form-control" id="modelo" max="30" required
+                            v-model="dados.veiculos.modelo">
                         <span class="erro" v-if="dados.errors.modelo">{{ dados.errors.modelo[0] }}</span>
                     </div>
                     <div class="col-md-6">
                         <label for="placa" class="form-label">Placa:</label>
-                        <input type="text" class="form-control" id="placa" max="30" required v-model="dados.veiculos.placa">
+                        <input type="text" class="form-control" id="placa" max="30" required
+                            v-model="dados.veiculos.placa">
                         <span class="erro" v-if="dados.errors.placa">{{ dados.errors.placa[0] }}</span>
                     </div>
                 </div>
@@ -52,22 +59,25 @@ async function cadastrarVeiculo() {
                 <div class="row mt-2">
                     <div class="col-md-6">
                         <label for="marca" class="form-label">Data de aquisição:</label>
-                        <input type="date" class="form-control" id="dataAquisicao" required v-model="dados.veiculos.dataAquisicao">
+                        <input type="date" class="form-control" id="dataAquisicao" required
+                            v-model="dados.veiculos.dataAquisicao">
                         <span class="erro" v-if="dados.errors.dataAquisicao">{{ dados.errors.dataAquisicao[0] }}</span>
                     </div>
                     <div class="col-md-6">
                         <label for="acessibilidade" class="form-label">Acessibilidade:</label>
-                        <select class="form-control" name="id_acessibilidade" id="acessibilidade" v-model="dados.veiculos.id_acessibilidade">
-                            <option selected>Sem acessibilidade</option>
+                        <select class="form-control" name="id_acessibilidade" id="acessibilidade"
+                            v-model="dados.veiculos.id_acessibilidade">
+                            <option value="0">Sem acessibilidade</option>
                             <option v-for="acessibilidade in dados.acessibilidades" class="form-control"
                                 :value="acessibilidade.id">{{ acessibilidade.categoria }}</option>
                         </select>
-                        <span class="erro" v-if="dados.errors.id_acessibilidade">{{ dados.errors.id_acessibilidade[0] }}</span>
+                        <span class="erro" v-if="dados.errors.id_acessibilidade">{{ dados.errors.id_acessibilidade[0]
+                            }}</span>
                     </div>
                 </div>
 
                 <div class="text-center mt-3">
-                    <button class="btn btn-primary"  v-on:click.submit.prevent="cadastrarVeiculo">Cadastrar</button>
+                    <button class="btn btn-primary" v-on:click.submit.prevent="cadastrarVeiculo">Cadastrar</button>
                 </div>
 
             </form>
@@ -76,8 +86,8 @@ async function cadastrarVeiculo() {
 </template>
 
 <style scoped>
-    .erro{
-        color: red;
-        font-size: 12px;
-    }
+.erro {
+    color: red;
+    font-size: 12px;
+}
 </style>

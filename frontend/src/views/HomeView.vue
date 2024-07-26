@@ -20,29 +20,9 @@ import {reactive, onMounted} from "vue";
 
 <template>
   <main class="container mt-5">
-    <table class="table">
-      <thead>
-        <tr>
-          <th class="text-center col-md-3" scope="col">Modelo</th>
-          <th class="text-center col-md-3" scope="col">Dt. aquisição</th>
-          <th class="text-center col-md-2" scope="col">Placa</th>
-          <th class="text-center col-md-2" scope="col">Acessibilidade</th>
-          <th class="text-center col-md-2" scope="col">Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="text-center" scope="row">1</td>
-          <td class="text-center">Mark</td>
-          <td class="text-center">Otto</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">
-            <button class="btn btn-primary mx-2">Editar</button>
-            <button class="btn btn-danger">Excluir</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="text-center">
+      <h2>Bem vindo</h2>
+    </div>
   </main>
 </template>
 

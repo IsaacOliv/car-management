@@ -13,6 +13,7 @@ const router = createRouter({
       name: 'about',
       component: () => import('../views/AboutView.vue')
     },
+    
     {
       path: '/acessibilidade/listagem',
       name: 'listagemAcessibilidade',
@@ -22,6 +23,11 @@ const router = createRouter({
       path: '/acessibilidade/cadastro',
       name: 'cadastroAcessibilidade',
       component: () => import('../views/acessbilidades/cadastro.vue')
+    },
+    {
+      path: '/acessibilidade/edicao/:id',
+      name: 'edicaoAcessibilidade',
+      component: () => import('../views/acessbilidades/edicao.vue')
     },
 
     {

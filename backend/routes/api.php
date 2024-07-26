@@ -12,7 +12,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::controller(AcessibilidadesController::class)->group(function(){
     Route::get('/acessibilidades', 'get');
     Route::post('/acessibilidades', 'post');
-    Route::put('/acessibilidades', 'put');
+    Route::get('/acessibilidades/{id}', 'edit');
+    Route::put('/acessibilidades/{id}', 'put');
+    Route::delete('/acessibilidades/{id}', 'delete');
 });
 
 Route::controller(VeiculosController::class)->group(function(){
@@ -20,4 +22,5 @@ Route::controller(VeiculosController::class)->group(function(){
     Route::post('/veiculos', 'post');
     Route::get('/veiculo/{id}', 'edit');
     Route::put('/veiculos/{id}', 'put');
+    Route::delete('/veiculos/{id}', 'delete');
 });
